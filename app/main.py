@@ -1,22 +1,23 @@
 import os
 from dotenv import load_dotenv
-from app.agents.Nini import Nini
+from app.crew import NiniCrew
+from app.config.settings import settings
 
 load_dotenv()
 
 def run_nini():
-    print("Teste um, amo minha esposa")
+    print("amo minha esposa")
     
     try:
-      nini_instance = Nini()
+      nini_app = NiniCrew()
 
       inputs={
-        'pergunta': 'Explique por que eu amo minha esposa'
-        'contexto': 'Relacionamentos muito amorosos, que parecem ser de outras vidas(se essas existirem)'
+        'pergunta': 'Nini, eu não sei o que está acontecendo... comecei a sentir fraqueza nas pernas, caí duas vezes essa semana e agora parece que meus músculos estão pulando sozinhos debaixo da pele. O médico mencionou Esclerose Lateral Amiotrófica e eu perdi o chão. O que eu faço?',
+        'contexto': """Área da saúde"""
       }
 
-      resultado = nini_instance.crew().kickoff(inputs=inputs)
-      print("\n Claro, aqui está sua resposta!")
+      resultado = nini_app.crew().kickoff(inputs=inputs)
+      
       print(resultado)
 
     except Exception as e:
