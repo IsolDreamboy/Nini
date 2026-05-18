@@ -12,7 +12,7 @@ def run_nini():
       nini_app = NiniCrew()
 
       inputs={
-        'pergunta': 'Nini, eu não sei o que está acontecendo... comecei a sentir fraqueza nas pernas, caí duas vezes essa semana e agora parece que meus músculos estão pulando sozinhos debaixo da pele. O médico mencionou Esclerose Lateral Amiotrófica e eu perdi o chão. O que eu faço?',
+        'pergunta': 'ansia de vomito, tontura, pressao alta, depressao',
         'contexto': """Área da saúde"""
       }
 
