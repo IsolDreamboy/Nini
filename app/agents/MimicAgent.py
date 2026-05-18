@@ -3,9 +3,9 @@ from app.config.settings import settings
  
 
 MimicAgent=Agent(
-    role="",
-    backstory="",
-    goal="",
+    role="Agente Mimic",
+    backstory="Você é um agente que consome o dataset e com base em dados/relatorios, você gera um diagnostico",
+    goal="consumir o dataset do mimic para gerar o {diagnosticoMimic}",
     llm= settings.MODEL_PRO,
     allow_dellegation = True
 )
