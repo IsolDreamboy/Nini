@@ -12,8 +12,8 @@ def run_nini():
       nini_app = NiniCrew()
 
       inputs={
-        'pergunta': 'ansia de vomito, tontura, pressao alta, depressao',
-        'contexto': """Área da saúde"""
+        'dadosPaciente': 'ansia de vomito, tontura, pressao alta, depressao',
+        
       }
 
       resultado = nini_app.crew().kickoff(inputs=inputs)
