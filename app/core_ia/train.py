@@ -15,3 +15,22 @@ def tokenizer_function(examples):
     label_mapping = {"yes": 0, "no": 1, "maybe":2}
     label= [label_mapping[l] for l in examples['final_decision']]
     
+print("teste,teste,mic check OK")
+tokenized_datasets= dataset.map(tokenize_function, batched=True)
+
+model=AutoModelForSequenceClassification.from_pretrained(model=name,num_labels=3)
+
+training_args = TrainingArguments(
+    output_dir = ,
+)
+
+trainer=Trainer(
+
+)
+
+print("treinem, treinem e treinem!!1")
+trainer.train() 
+
+model.save_pretrained(./)
+tokenizer.save_pretrained(./)
+print("e isso é tutututututudo pepepepepessoal")
