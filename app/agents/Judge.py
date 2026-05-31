@@ -8,3 +8,4 @@ Juiz=Agent(
     llm = settings.MODEL_PRO,
     allow_dellegation= True
 )
+
