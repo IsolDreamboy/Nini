@@ -20,13 +20,13 @@ def tokenizer_function(examples):
     return tokenized
     
 print("teste,teste,mic check OK")
-tokenized_datasets = dataset.map(tokenize_function, batched=True)
+tokenized_datasets = dataset.map(tokenizer_function, batched=True)
 
 model=AutoModelForSequenceClassification.from_pretrained(model_name,num_labels=3)
 
 training_args = TrainingArguments(
     output_dir = "./resultados_pubmed",
-    evaluation_strategy = "epoch",
+    eval_strategy = "epoch",
     save_strategy = "epoch",
     learning_rate = 2e-5,
     per_device_train_batch_size = 8,
