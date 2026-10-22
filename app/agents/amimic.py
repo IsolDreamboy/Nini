@@ -5,6 +5,6 @@ amimic=Agent(
     role="",
     goal="",
     backstory="",
-    llm=settings.MODEL_GROQ,
+    llm=settings.MODEL_PRO,
     allow_delegation = False
 )

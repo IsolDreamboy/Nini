@@ -1,10 +1,10 @@
+<<<<<<< HEAD
 import os
-from dotenv import load_dotenv
-from app.crew import NiniCrew
-from app.config.settings import settings
+from fastapi import FastAPI
 
-load_dotenv()
+app=FastAPI()
 
+<<<<<<<< HEAD:main.py
 def run_nini():
     print("amo minha esposa")
     
@@ -25,4 +25,20 @@ def run_nini():
 
 if __name__=="__main__":
     run_nini()
+========
+@app.get("/")
+def read_root():
+  return {"Hello": "Nini"}
+>>>>>>>> d5104b5 (Alterações cruciais):app/main.py
 
+@app.get("/item/{item_id}")
+def read_item(item_id: int, q: str | None = None):
+  return {"item_id": item_id, "q": q}
+=======
+def main():
+    print("Hello from nini!")
+
+
+if __name__ == "__main__":
+    main()
+>>>>>>> d5104b5 (Alterações cruciais)
