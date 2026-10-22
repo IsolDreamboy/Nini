@@ -1,28 +1,12 @@
 import os
-from dotenv import load_dotenv
-from app.crew import NiniCrew
-from app.config.settings import settings
+from fastapi import FastAPI
 
-load_dotenv()
+app=FastAPI()
 
-def run_nini():
-    print("amo minha esposa")
-    
-    try:
-      nini_app = NiniCrew()
+@app.get("/")
+def read_root():
+  return {"Hello": "Nini"}
 
-      inputs={
-        'pergunta': 'Nini, eu não sei o que está acontecendo... comecei a sentir fraqueza nas pernas, caí duas vezes essa semana e agora parece que meus músculos estão pulando sozinhos debaixo da pele. O médico mencionou Esclerose Lateral Amiotrófica e eu perdi o chão. O que eu faço?',
-        'contexto': """Área da saúde"""
-      }
-
-      resultado = nini_app.crew().kickoff(inputs=inputs)
-      
-      print(resultado)
-
-    except Exception as e:
-      print(f"Erro ao executar o Nini: {str(e)}")
-
-if __name__=="__main__":
-    run_nini()
-
+@app.get("/item/{item_id}")
+def read_item(item_id: int, q: str | None = None):
+  return {"item_id": item_id, "q": q}
