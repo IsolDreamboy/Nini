@@ -18,6 +18,7 @@ from app.models.register import Prontuario
 from app.config.settings import settings
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Nini=Agent(
     role="Enfermeira de Triagem",
     goal="Tratar dados do {dadosPaciente} que será enviado para os outros agentes. Você só utiliza os dados do input, não inventa nada",
@@ -26,6 +27,8 @@ Nini=Agent(
     allow_dellegation=True
 )
 =======
+=======
+>>>>>>> d5104b514895dc2362c621e68711e7e7d4f2eb4e
 
 Nini= create_agent(
     model = settings.MODEL_PRO,
@@ -56,5 +59,9 @@ if prontuario_validado:
     print(prontuario_validado.model_dump_json(indent=2))
 else:
     print("Resposta recebida do agente:")
+<<<<<<< HEAD
     print(response)
 >>>>>>> d5104b5 (Alterações cruciais)
+=======
+    print(response)
+>>>>>>> d5104b514895dc2362c621e68711e7e7d4f2eb4e
