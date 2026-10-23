@@ -17,18 +17,8 @@ from pydantic import BaseModel
 from app.models.register import Prontuario
 from app.config.settings import settings
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-Nini=Agent(
-    role="Enfermeira de Triagem",
-    goal="Tratar dados do {dadosPaciente} que será enviado para os outros agentes. Você só utiliza os dados do input, não inventa nada",
-    backstory="""Você é Nini, a agente da saúde principal de onde trabalha, você ama cuidar dos outros e é muito gentil e educada.""",
-    llm= settings.MODEL_GROQ,
-    allow_dellegation=True
-)
-=======
-=======
->>>>>>> d5104b514895dc2362c621e68711e7e7d4f2eb4e
+
+
 
 Nini= create_agent(
     model = settings.MODEL_PRO,
@@ -49,7 +39,7 @@ Sinais vitais: PA 120/80 mmHg, FC 75 bpm, SpO2 98%, temperatura 36.5°C, glicemi
 """
 
 pergunta = HumanMessage(content=texto_paciente)
-response = agent.invoke(
+response = Nini.invoke(
     {"messages": [pergunta]}
 )
 
@@ -59,9 +49,8 @@ if prontuario_validado:
     print(prontuario_validado.model_dump_json(indent=2))
 else:
     print("Resposta recebida do agente:")
-<<<<<<< HEAD
+
     print(response)
->>>>>>> d5104b5 (Alterações cruciais)
-=======
+
     print(response)
->>>>>>> d5104b514895dc2362c621e68711e7e7d4f2eb4e
+
