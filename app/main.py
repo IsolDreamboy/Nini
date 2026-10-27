@@ -1,16 +1,14 @@
-import os
 from fastapi import FastAPI
+from app.api.v1.triage import router as triage_router
 
-app=FastAPI()
+app= FastAPI(
+  title="Nini",
+  description="API para triagem",
+  version="1.0.0"
+)
 
-@app.get("/")
-def read_root():
-  return {"Hello": "Nini"}
+app.include_router(triage_router)
 
-@app.get("/teste/{teste_id}")
-def read_teste(teste_id: int, q: str | None = None):
-  return {"teste_id": teste_id, "q": q}
-
-@app.post("/tst")
-def read_tst(tst_id : int, q:str | None = None):
-  return{"tst_id": teste_id, "q": q}
+@app.get("/health")
+def health_check():
+  return {"status": "operational","system": "Nini"}
