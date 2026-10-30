@@ -2,7 +2,7 @@ from pydantic import BaseModel,Field, EmailStr, model_validator
 from typing import List, Optional
 
 class Sintomas(BaseModel):
-  sintomas:str
+  sintomas: List[str] = []
   
 
 class RegistroPaciente(BaseModel):
@@ -72,3 +72,4 @@ class Prontuario(BaseModel):
   antropometria : DadosAntropometria
   sinais_vitais : SinaisVitais
   estilo_de_vida : DadosEstiloDeVida
+  sintomas: Sintomas

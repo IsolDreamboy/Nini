@@ -1,8 +1,10 @@
+import TriagemFront from "./TriagemFront.tsx"
+
 
 function App(){
  return(
-  <div className="bg-[pink] h-80 w-full">
-    <div className="bg-[black] h-70 w-full"></div>
+  <div className="bg-[purple] h-320 w-full">
+    <TriagemFront/>
   </div>
  )
 

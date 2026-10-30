@@ -1,14 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from app.models.register import Prontuario as ptr
+from app.models.register import Prontuario
 from app.services.triage_engine import run_nini_triage, TriageResult
 
 router = APIRouter(prefix="/api/v1/triage", tags = ["Triagem"])
 
 class TriagePayload(BaseModel):
   paciente_id: int
-  sintomas: str
-  ptr:str
+  prontuario:str
 
 class TriageResponse(BaseModel):
   status: str
@@ -21,8 +20,7 @@ async def create_triage(payload: TriagePayload):
 
     nini_result= await run_nini_triage(
       paciente_id= payload.paciente_id,
-      sintomas= payload.sintomas,
-      prontuario= payload.ptr
+      prontuario= payload.prontuario
     )
 
     return TriageResponse(

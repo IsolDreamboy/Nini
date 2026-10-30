@@ -17,7 +17,7 @@ class TriageResult(BaseModel):
         description="Ação imediata recomendada (ex: Encaminhamento para Sala Vermelha)"
     )
 
-async def run_nini_triage(paciente_id: int, sintomas: str, prontuario: str) -> TriageResult:
+async def run_nini_triage(paciente_id: int, prontuario: str) -> TriageResult:
    
     llm = settings.MODEL_PRO
     structured_llm = llm.with_structured_output(TriageResult)
@@ -27,11 +27,11 @@ async def run_nini_triage(paciente_id: int, sintomas: str, prontuario: str) -> T
             "system",
             "Você é o motor de triagem do sistema Nini. Analise o prontuário e os sintomas informados "
             "e classifique o nível de urgência do paciente utilizando o Protocolo de Manchester."
+        
         ),
         (
             "human",
-            "ID do Paciente: {paciente_id}\n"
-            "Sintomas Atuais: {sintomas}\n"
+            "ID do Paciente: {paciente_id}\n"      
             "Prontuário/Histórico: {prontuario}"
         )
     ])
@@ -40,7 +40,6 @@ async def run_nini_triage(paciente_id: int, sintomas: str, prontuario: str) -> T
 
     response = await triage_chain.ainvoke({
         "paciente_id": paciente_id,
-        "sintomas": sintomas,
         "prontuario": prontuario
     })
     return response
