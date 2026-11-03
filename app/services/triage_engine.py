@@ -3,6 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from app.config.settings import settings
 
+
 class TriageResult(BaseModel):
     manchester_cor: str = Field(
         description="Cor do Protocolo de Manchester: Vermelho, Laranja, Amarelo, Verde ou Azul"

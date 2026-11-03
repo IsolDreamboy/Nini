@@ -1,18 +1,15 @@
-version: '1.0'
-
 services:
   db:
-    image: pgvector/pgvector:16
+    image: pgvector/pgvector:pg16
     container_name: nini_db
     environment:
-      POSTGRES_USER:
-      POSTGRES_PASSWORD:
-      POSTGRES_DB:
-
+      POSTGRES_USER: isol
+      POSTGRES_PASSWORD: isol123
+      POSTGRES_DB: triagem_db
     ports:
-     - "5432:5432"
+      - "5433:5432"
     volumes:
-     - nini_pgdb:/var/lib/postgresql/data
+      - nini_pgdb:/var/lib/postgresql/data
 
 volumes:
-  nini_pgdata
+  nini_pgdb:
