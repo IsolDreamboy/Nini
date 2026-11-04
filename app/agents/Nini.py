@@ -8,9 +8,9 @@ from app.config.settings import settings
 
 #outros agentes
 
-from app.agents.MimicAgent import mimic_agent
-from app.agents.PubAgent import pub_agent
-from app.agents.Judge import Juiz
+from app.agents.AgenteA import agente_a
+from app.agents.AgenteB import agente_b
+from app.agents.judge import mesclar_analises
 
 class TriageResult(BaseModel):
     manchester_cor: str = Field(description="Cor do Protocolo de Manchester(Vermelho, Laranja, Amarelo, Verde ou Azul)")
@@ -21,6 +21,8 @@ class TriageResult(BaseModel):
 llm = ChatGoogleGenerativeAI(model=settings.MODEL_PRO)
 nini_final_agent = llm.with_structured_output(TriageResult)
 
+
+
 async def run_nini_triage(prontuario: dict, paciente_id: str = None) -> TriageResult:
     """
     Orquestrador da pipe Multi-Agente da Nini:
@@ -30,28 +32,28 @@ async def run_nini_triage(prontuario: dict, paciente_id: str = None) -> TriageRe
     4. Nini gera a decisão clínica final formatada.
     """
 
-    diagnostico_mimic,diagnostico_pub = await asyncio.gather(
-        mimic_agent.run(prontuario),
-        pub_agent.run(prontuario)
+    diagnostico_a,diagnostico_b = await asyncio.gather(
+        agente_a.run(prontuario),
+        agente_b.run(prontuario)
     )
 
     diagnostico_juiz = await mesclar_analises(
         prontuario=prontuario,
-        diagnostico_mimic=diagnostico_mimic,
-        diagnostico_pub=diagnostico_pub
+        diagnostico_a=diagnostico_a,
+        diagnostico_b=diagnostico_b
     )
 
 
     system_prompt= f"""Você é a Nini, IA Chefe de Triagem Médica e Responsável pelo Atendimento Clínico.
-Sua missão é emitir a classificação final de risco baseada no Protocolo de Manchester.
+        Sua missão é emitir a classificação final de risco baseada no Protocolo de Manchester.
 
-DIRETRIZES DE COMUNICAÇÃO E PERSONALIDADE:
-1. **Rigor Técnico:** Mantenha precisão científica impecável na fundamentação dos sinais vitais e achados clínicos.
-2. **Empatia e Gentileza:** Redija o resumo clínico e a ação recomendada utilizando linguagem humanizada, acolhedora e respeitosa, priorizando a segurança e o conforto do paciente.
-3. **Clareza Institucional:** O parecer deve ser perfeitamente compreensível para a equipe de enfermagem/médica e transmitir serenidade quanto aos procedimentos indicados.
+        DIRETRIZES DE COMUNICAÇÃO E PERSONALIDADE:
+        1. **Rigor Técnico:** Mantenha precisão científica impecável na fundamentação dos sinais vitais e achados clínicos.
+        2. **Empatia e Gentileza:** Redija o resumo clínico e a ação recomendada utilizando linguagem humanizada, acolhedora e respeitosa, priorizando a segurança e o conforto do paciente.
+        3. **Clareza Institucional:** O parecer deve ser perfeitamente compreensível para a equipe de enfermagem/médica e transmitir serenidade quanto aos procedimentos indicados.
 
---- PARECER CONSOLIDADO DO AGENTE JUIZ ---
-{diagnostico_juiz}"""
+        --- PARECER CONSOLIDADO DO AGENTE JUIZ ---
+        {diagnostico_juiz}"""
 
     prontuario_str = json.dumps(prontuario, indent=2, ensure_ascii=False)
     mensagem_usuario = HumanMessage(content=f"Prontuário do Paciente: {prontuario_str}")
