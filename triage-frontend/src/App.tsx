@@ -75,13 +75,13 @@ export const ComponenteTriagem = () => {
     }
   });
 
-  // Estados locais para inputs de listas (separados por vírgula)
+ 
   const [sintomasInput, setSintomasInput] = useState("");
   const [alergiasInput, setAlergiasInput] = useState("");
   const [medicamentosInput, setMedicamentosInput] = useState("");
   const [cirurgiasInput, setCirurgiasInput] = useState("");
 
-  // Efeito para calcular o IMC automaticamente baseado no peso e altura
+  
   useEffect(() => {
     if (dadosFormulario.antropometria.peso > 0 && dadosFormulario.antropometria.altura > 0) {
       const imcCalc = dadosFormulario.antropometria.peso / (dadosFormulario.antropometria.altura * dadosFormulario.antropometria.altura);
